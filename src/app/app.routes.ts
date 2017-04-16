@@ -2,14 +2,18 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AuthGuard } from './auth.service';
-import { EmailComponent } from './email/email.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './services/auth.service';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { ItemsListComponent } from './items-list/items-list.component';
 
 export const router: Routes = [
-    { path: '', redirectTo: 'login-email', pathMatch: 'full' },
-    { path: 'login-email', component: EmailComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: LoginPageComponent },
+    { path: 'users', component: UsersListComponent},
+    { path: 'items', component: ItemsListComponent},
+    { path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard] }
 
 ]
 
