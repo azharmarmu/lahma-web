@@ -9,10 +9,10 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { ItemsListComponent } from './items-list/items-list.component';
 
 export const router: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'login', component: LoginPageComponent },
-    { path: 'users', component: UsersListComponent},
-    { path: 'items', component: ItemsListComponent},
+    { path: 'users', component: UsersListComponent, canActivate: [AuthGuard]},
+    { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard]},
     { path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard] }
 
 ]

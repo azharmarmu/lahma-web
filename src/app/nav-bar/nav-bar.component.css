@@ -1,0 +1,11 @@
+.navbar-inverse{
+    background-color:#B7950B;
+    border-color:#17202A;
+}
+.navbar-collapse{
+    border-color:#17202A;
+}   
+.navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+    color: #B7950B;
+    background-color: #17202A;
+}
