@@ -1,0 +1,16 @@
+pagination-controls{
+    float: right;
+}
+
+.btn.btn-success {
+    color: #17202a;
+    background-color: #b7950b;
+    background-image: linear-gradient(to bottom, #b7950b, #b7950b);
+    border-color: #b7950b;
+}
+.btn.btn-success:hover {
+    color: #17202a;
+    background-color: #b7950b;
+    background-image: linear-gradient(to bottom, #b7950b, #b7950b);
+    border-color: #b7950b
+}

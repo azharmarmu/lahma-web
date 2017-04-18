@@ -7,13 +7,15 @@
     <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class='panel-heading'>Item List</div>
-    <div class='panel-body'>
+    <div class='panel-body'*ngIf="filteredItems != 0">
          <table class="table table-bordered table-condensed ">
             <thead>
-              <th>Name</th>
-              <th>Rate</th>
-              <th>Type</th>
-              <th>Available_kg</th>
+              <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Type</th>
+                <th>Available_kg</th>
+              </tr>
             </thead>
             <tbody>
                <tr *ngFor="let item of filteredItems">
@@ -21,6 +23,12 @@
                   <td>{{item.rate}}</td>
                   <td>{{item.type}}</td>
                   <td>{{item.available_kg}}</td>
+                  <td 
+                    (click)="openEditDialog(item)">
+                    <a class="btn btn-success btn-sm">Edit 
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                  </td>
                </tr>
             </tbody>
          </table>

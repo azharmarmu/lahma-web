@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService} from '../services/firebase.service';
+import { FirebaseService} from '../../shared/services/firebase.service';
 
 @Component({
-  selector: 'app-items-list',
-  templateUrl: './items-list.component.html',
-  styleUrls: ['./items-list.component.css']
+  selector: 'app-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.css']
 })
-export class ItemsListComponent implements OnInit{
-    items:any;
-    filteredItems:any;
+export class UsersListComponent implements OnInit {
+    users:any;
+    filteredUsers:any;
     pages : number = 4;
     pageSize : number = 5;
     pageNumber : number = 0;
@@ -17,49 +17,53 @@ export class ItemsListComponent implements OnInit{
     pageStart : number = 1;
     inputName : string = '';
 
-    constructor(private firebaseService:FirebaseService) {
-    }
+    constructor(private firebaseService:FirebaseService) { }
 
     init(){
       this.currentIndex = 1;
       this.pageStart = 1;
       this.pages = 4;
+      this.pageSize = 4;
 
-      this.pageNumber = parseInt(""+ (this.filteredItems.length / this.pageSize));
-      if(this.filteredItems.length % this.pageSize != 0){
+      this.pageNumber = parseInt(""+ (this.filteredUsers.length / this.pageSize));
+      if(this.filteredUsers.length % this.pageSize != 0){
           this.pageNumber ++;
       }
   
       if(this.pageNumber  < this.pages){
             this.pages =  this.pageNumber;
       }
-      this.refreshItems();
+      this.refreshUsers();
       console.log("this.pageNumber :  "+this.pageNumber);
     }
 
-    ngOnInit(){
-      this.firebaseService.getItems().subscribe(items=>{
-        console.log(items);//remove in production
-        this.items=items;
-        this.filteredItems = items;
+    ngOnInit() {
+      this.firebaseService.getUsers().subscribe(users=>{
+        console.log(users);//remove in production
+        this.users=users;
+        this.filteredUsers = users;
 
         this.init();
       })
     }
 
     FilterByName(){
-      this.filteredItems = [];
+      this.filteredUsers = [];
 
       if(this.inputName != ""){
-            this.items.forEach(element => {
+            this.users.forEach(element => {
                 if(element.name.toLowerCase().includes(this.inputName.toLowerCase())){
-                  this.filteredItems.push(element);
-               }
+                  this.filteredUsers.push(element);
+                }else if(element.phoneNumber.toString().includes(this.inputName.toLowerCase())){
+                  this.filteredUsers.push(element);
+                }else if(element.email.toLowerCase().includes(this.inputName.toLowerCase())){
+                  this.filteredUsers.push(element);
+                }
             });
       }else{
-         this.filteredItems = this.items;
+         this.filteredUsers = this.users;
       }
-      console.log(this.filteredItems);
+      console.log(this.filteredUsers);
       this.init();
     }
 
@@ -71,7 +75,7 @@ export class ItemsListComponent implements OnInit{
       return obj;
     }
 
-    refreshItems(){
+    refreshUsers(){
       this.pagesIndex =  this.fillArray();
     }
 
@@ -82,7 +86,7 @@ export class ItemsListComponent implements OnInit{
         if(this.currentIndex < this.pageStart){
           this.pageStart = this.currentIndex;
         }
-        this.refreshItems();
+        this.refreshUsers();
     }
 
     nextPage(){
@@ -93,12 +97,12 @@ export class ItemsListComponent implements OnInit{
         if(this.currentIndex >= (this.pageStart + this.pages)){
           this.pageStart = this.currentIndex - this.pages + 1;
         }
-        this.refreshItems();
+        this.refreshUsers();
     }
 
     setPage(index : number){
           this.currentIndex = index;
-          this.refreshItems();
+          this.refreshUsers();
     }
 
 }

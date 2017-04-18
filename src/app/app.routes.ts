@@ -2,11 +2,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AuthGuard } from './services/auth.service';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { UsersListComponent } from './users-list/users-list.component';
-import { ItemsListComponent } from './items-list/items-list.component';
+import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import { ItemsListComponent } from './components/items-list/items-list.component';
+
+import { AuthGuard } from './shared/services/auth.service';
 
 export const router: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
